@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version '2.0.4.RELEASE'
+}
+
+mainClassName='com.vagner.zipkin.Aplication'
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+
+    group 'com.vagner.zipkin'
+    version '1.0'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+        mavenLocal()
+        maven {
+            url 'http://repo.spring.io/release'
+        }
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.4.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.0.4.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-jetty', version: '2.0.4.RELEASE'
+        compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+        compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin', version: '1.0.0.RELEASE'
+        compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
+        testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.0.4.RELEASE'
+        testCompile group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
+    }
+
+    configurations {
+        compile.exclude module: "spring-boot-starter-tomcat"
+    }
+}
