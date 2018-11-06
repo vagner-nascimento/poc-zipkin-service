@@ -1,24 +1,30 @@
 package com.vagner.zipkin;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import brave.sampler.Sampler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.sleuth.metric.SpanMetricReporter;
-import org.springframework.cloud.sleuth.zipkin.ZipkinProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class Application {
-    @Autowired
-    private SpanMetricReporter spanMetricReporter;
-    @Autowired
-    private ZipkinProperties zipkinProperties;
-    @Value("${spring.sleuth.web.skipPattern}")
-    private String skipPattern;
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
+    /*
+        TODO:
+         Observaçoes: Necessário o @Bean getRestTemplate somente quando vai utilizar
+         chamadas a outros serviços. Se instanciar um novo e Zipkin nao consegue
+         fazer o trace da requisiçao.
+     */
+    @Bean
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
 
+    @Bean
+    public Sampler getSampler() {
+        return Sampler.ALWAYS_SAMPLE;
+    }
 }
