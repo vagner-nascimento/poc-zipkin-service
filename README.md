@@ -9,4 +9,4 @@ POC to test Zipkin on Spring Cloud
 - End-point: http://localhost:8080/developers/salaries/
 
 # Utils
-- Zipikin e Sleuth video tutorial: https://www.youtube.com/watch?v=dzr0CWjC8sg
+- Zipkin e Sleuth video tutorial: https://www.youtube.com/watch?v=dzr0CWjC8sg
