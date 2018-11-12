@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -22,12 +22,12 @@ public class ZipkinDeveloperFacade {
     @Autowired
     private RestTemplate restTemplate;
 
-    public Map<String, Long> getDeveloperSalaries() {
+    public List<DeveloperResponse> getDeveloperSalaries() {
         try {
             return restTemplate.exchange(this.END_POINT,
                     HttpMethod.GET,
                     HttpEntity.EMPTY,
-                    new ParameterizedTypeReference<Map<String, Long>>() {
+                    new ParameterizedTypeReference<List<DeveloperResponse>>() {
                     }).getBody();
         } catch (HttpClientErrorException httEx) {
             log.error(httEx.getStatusCode().toString());
