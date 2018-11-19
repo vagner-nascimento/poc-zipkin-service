@@ -15,10 +15,6 @@ import java.util.List;
 @Service
 public class ZipkinDeveloperFacade {
     private final String END_POINT = "http://localhost:8081/zipkin/customers/salaries/developers";
-    /*
-        TODO:
-         Observaçoes: Este restTamplate utiliza o do @Bean declarado na Application
-     */
     @Autowired
     private RestTemplate restTemplate;
 

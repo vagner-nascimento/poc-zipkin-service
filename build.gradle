@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.springframework.boot' version '2.0.4.RELEASE'
+    id 'org.springframework.boot' version '2.0.6.RELEASE'
 }
 
 mainClassName = 'com.vagner.zipkin.Application'
@@ -28,19 +28,18 @@ allprojects {
         mavenCentral()
         jcenter()
     }
-
+/*
     dependencyManagement {
         imports {
             mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Finchley.SR2'
         }
     }
-
+*/
     dependencies {
-        compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.4.RELEASE'
-        compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.0.4.RELEASE'
-        compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '2.0.1.RELEASE'
-        compile group: 'org.springframework.cloud', name: 'spring-cloud-sleuth-zipkin', version: '2.0.1.RELEASE'
-        compile group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.0.5.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.6.RELEASE'
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.0.6.RELEASE'
+        compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '2.0.2.RELEASE'
+        compile group: 'org.springframework.cloud', name: 'spring-cloud-sleuth-zipkin', version: '2.0.2.RELEASE'
 
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-jetty', version: '2.0.4.RELEASE'
         compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
