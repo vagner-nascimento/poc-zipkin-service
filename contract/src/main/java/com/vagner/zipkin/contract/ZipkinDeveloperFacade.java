@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 @Service
 public class ZipkinDeveloperFacade {
-    private final String END_POINT = "http://localhost:8081/zipkin/customers/salaries/developers";
+    private final String END_POINT = "http://localhost:8081/zipkin/customers";
     @Autowired
     private RestTemplate restTemplate;
 
