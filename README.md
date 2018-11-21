@@ -1,4 +1,4 @@
-# POC Zipkin with Spring Cloud
+# POC Zipkin with Spring Cloud and RabbitMQ
 
 POC to test Zipkin on Spring Cloud
 
