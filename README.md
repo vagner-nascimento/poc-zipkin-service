@@ -3,7 +3,7 @@
 POC to test Spring Cloud using Rabbit MQ to delivery traces to Zipkin. 
 
 # How to run
-- Run **sudo docker-compose up** over **.yml** file founded on **Docker** folder. It will start **RabbitMQ** broker and **Zipkin** server already configured to consume **zipkin** queue from Rabbit broker.
+- Run **sudo docker-compose up** over **.yml** file founded on **Docker** folder. It will start **RabbitMQ** broker and **Zipkin** server already configured to consume **zipkin**'s queue from Rabbit broker.
  
 - Run **poc-zipkin-service1** (https://github.com/vagner-nascimento/poc-zipkin-service1/tree/adding-rabbitmq). It will be called here.
 
