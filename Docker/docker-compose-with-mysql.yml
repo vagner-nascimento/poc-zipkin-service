@@ -8,11 +8,16 @@ services:
     container_name: zipkin
     environment:
       - RABBIT_ADDRESSES=rabbitmq:5672
+      # Set storage type
+      - STORAGE_TYPE=mysql
+      # Point the zipkin at the storage backend
+      - MYSQL_HOST=mysql
     ports:
       # Port used for the Zipkin UI and HTTP Api
       - ${ZIPKIN_PORT:-9411}:9411
     depends_on:
       - rabbitmq
+      - storage
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -20,3 +25,17 @@ services:
     ports:
       - ${RABBIT_PORT:-5672}:5672
       - ${RABBIT_PORT:-15672}:15672
+
+  storage:
+    image: openzipkin/zipkin-mysql
+    container_name: mysql
+    # Expose the storage port for testing
+    ports:
+      - 3306:3306
+    volumes:
+      - dbfiles:/mysql/data
+    # Uncomment to restart if it get down
+    # restart: unless-stopped
+
+volumes:
+  dbfiles:
