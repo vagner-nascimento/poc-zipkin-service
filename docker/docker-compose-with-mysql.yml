@@ -4,7 +4,7 @@ services:
   # The zipkin process services the UI, and also exposes a POST endpoint that
   # instrumentation can send trace data to. Scribe is disabled by default.
   zipkin:
-    image: openzipkin/zipkin
+    image: docker-images.dimed.com.br:5000/zipkin
     container_name: zipkin
     environment:
       - RABBIT_ADDRESSES=rabbitmq:5672
@@ -20,14 +20,14 @@ services:
       - storage
 
   rabbitmq:
-    image: rabbitmq:3-management
+    image: docker-images.dimed.com.br:5000/rabbitmq:3-management
     container_name: rabbitmq
     ports:
       - ${RABBIT_PORT:-5672}:5672
       - ${RABBIT_PORT:-15672}:15672
 
   storage:
-    image: openzipkin/zipkin-mysql
+    image: docker-images.dimed.com.br:5000/zipkin-mysql
     container_name: zipkin-mysql
     # Expose the storage port for testing
     ports:
