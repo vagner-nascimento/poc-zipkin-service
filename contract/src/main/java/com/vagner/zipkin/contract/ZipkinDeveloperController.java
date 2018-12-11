@@ -14,7 +14,7 @@ public class ZipkinDeveloperController {
     @Autowired
     private ZipkinDeveloperFacade zipkinFacade;
 
-    @GetMapping(value = "/salaries", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DeveloperResponse> getDeveloperSalaries() {
         return zipkinFacade.getDeveloperSalaries();
     }

@@ -1,6 +1,5 @@
 package com.vagner.zipkin;
 
-import brave.sampler.Sampler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -13,19 +12,11 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    /*
-        TODO:
-         Observaçoes: Necessário o @Bean getRestTemplate somente quando vai utilizar
-         chamadas a outros serviços. Se instanciar um novo e Zipkin nao consegue
-         fazer o trace da requisiçao.
-     */
+    //TODO:
+    // Observaçoes: O rest template deve ser sigleton para toda a aplicaçao.
+    // Caso contrário o Sleuth nao consegue juntar os spams em um só trace.
     @Bean
-    public RestTemplate getRestTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
-
-    @Bean
-    public Sampler getSampler() {
-        return Sampler.ALWAYS_SAMPLE;
+    public RestTemplate restTemplate(RestTemplateBuilder templateBuilder) {
+        return templateBuilder.build();
     }
 }

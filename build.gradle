@@ -1,21 +1,21 @@
 plugins {
-    id 'java'
-    id 'application'
-    id 'org.springframework.boot' version '2.0.4.RELEASE'
+    id "java"
+    id "application"
+    id "org.springframework.boot" version "2.0.6.RELEASE" //version 2.0.4.RELEASE doesn't work
 }
 
-mainClassName = 'com.vagner.zipkin.Application'
+mainClassName = "com.vagner.zipkin.Application"
 
 dependencies {
-    compile project(':contract')
+    compile project(":contract")
 }
 
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'io.spring.dependency-management'
+    apply plugin: "java"
+    apply plugin: "io.spring.dependency-management"
 
-    group 'com.vagner.zipkin'
-    version '1.0'
+    group "com.vagner.zipkin"
+    version "1.0"
 
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -23,7 +23,7 @@ allprojects {
     repositories {
         mavenLocal()
         maven {
-            url 'http://repo.spring.io/release'
+            url "http://repo.spring.io/release"
         }
         mavenCentral()
         jcenter()
@@ -31,18 +31,28 @@ allprojects {
 
     dependencyManagement {
         imports {
-            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Finchley.SR2'
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.SR2"
         }
     }
 
-    dependencies {
-        compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zipkin', version: '2.0.1.RELEASE'
-        compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '2.0.1.RELEASE'
+    ext {
+        ver = [
+                springBoot : '2.0.6.RELEASE',
+                springCloud: '2.0.2.RELEASE',
+                lombok     : '1.18.2'
+        ]
+    }
 
-        compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.4.RELEASE'
-        compile group: 'org.springframework.boot', name: 'spring-boot-starter-jetty', version: '2.0.4.RELEASE'
-        compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
-        testCompile group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
+    dependencies {
+        compile group: "org.springframework.boot", name: "spring-boot-starter-web", version: "${ver.springBoot}"
+        compile group: "org.springframework.boot", name: "spring-boot-starter-actuator", version: "${ver.springBoot}"
+        compile group: "org.springframework.cloud", name: "spring-cloud-starter-sleuth", version: "${ver.springCloud}"
+        compile group: "org.springframework.cloud", name: "spring-cloud-sleuth-zipkin", version: "${ver.springCloud}"
+        compile group: "org.springframework.amqp", name: "spring-rabbit", version: "2.0.6.RELEASE"
+
+        compile group: "org.springframework.boot", name: "spring-boot-starter-jetty", version: "${ver.springBoot}"
+        compileOnly group: "org.projectlombok", name: "lombok", version: "${ver.lombok}"
+        testCompile group: "org.projectlombok", name: "lombok", version: "${ver.lombok}"
     }
 
     configurations {

@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  # The zipkin process services the UI, and also exposes a POST endpoint that
+  # instrumentation can send trace data to. Scribe is disabled by default.
+  zipkin:
+    image: docker-images.dimed.com.br:5000/zipkin
+    container_name: zipkin
+    environment:
+      - RABBIT_ADDRESSES=rabbitmq:5672
+      # Set storage type
+      - STORAGE_TYPE=mysql
+      # Point the zipkin at the storage backend
+      - MYSQL_HOST=zipkin-mysql
+    ports:
+      # Port used for the Zipkin UI and HTTP Api
+      - ${ZIPKIN_PORT:-9411}:9411
+    depends_on:
+      - rabbitmq
+      - storage
+
+  rabbitmq:
+    image: docker-images.dimed.com.br:5000/rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - ${RABBIT_PORT:-5672}:5672
+      - ${RABBIT_PORT:-15672}:15672
+
+  storage:
+    image: docker-images.dimed.com.br:5000/zipkin-mysql
+    container_name: zipkin-mysql
+    # Expose the storage port for testing
+    ports:
+      - 3306:3306
+    volumes:
+      - dbfiles:/mysql/data
+    # Uncomment to restart if it get down
+    # restart: unless-stopped
+
+volumes:
+  dbfiles:
